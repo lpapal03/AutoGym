@@ -17,7 +17,7 @@ def reserve_for_all():
     for file in os.listdir("users"):
         try:
             username, password, preference_map = tools.extract_details('users/' + file)
-            r_date, r_time, err = tools.caluclate_resv_date_and_time(preference_map)
+            r_date, r_time, err = tools.caluclate_resv_date_and_time(username, preference_map)
             if not err:
                 reserver.reserve_gym_spot(username, password, r_date, r_time, HEADLESS, DEBUG)
         except Exception:
@@ -32,4 +32,3 @@ if __name__ == "__main__":
         while True:
             schedule.run_pending()
             time.sleep(1)
-
