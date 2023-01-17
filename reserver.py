@@ -23,6 +23,7 @@ MAX_DELAY = 20
 
 def reserve_gym_spot(username, password, resv_date, resv_time, headless=False, debug=True):
     # options
+    print('Start reserver for ' + username + "\n------------")
     chrome_options = Options()
     if headless:
         chrome_options.add_argument("--headless")
@@ -134,11 +135,11 @@ def reserve_gym_spot(username, password, resv_date, resv_time, headless=False, d
             (By.XPATH, '/html/body/div[2]/div/div[4]/form/table/tbody/tr[3]/td[2]/textarea')))
         submit_button = WebDriverWait(driver, MAX_DELAY).until(EC.presence_of_element_located((By.TAG_NAME, "button")))
 
+
         # date_input.clear()
         # date_input.send_keys(resv_date)
         sport_selection.select_by_value('41')
         set_time.select_by_visible_text(resv_time)
-
         purpose.send_keys("Gym")
         submit_button.click()
 
