@@ -25,10 +25,11 @@ def reserve_for_all():
 
 
 if __name__ == "__main__":
-    if sys.argv < 2:
+    if len(sys.argv) < 2:
         reserve_for_all()
-    elif sys.argv > 2 and sys.argv[1] == 's':
+    elif len(sys.argv) > 1 and sys.argv[1] == 's':
         schedule.every().day.at("08:01").do(reserve_for_all)
         while True:
             schedule.run_pending()
             time.sleep(1)
+
