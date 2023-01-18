@@ -17,9 +17,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.chrome.options import Options
 
-URL = "http://applications.ucy.ac.cy/pub_sportscenter/main"
 MAX_DELAY = 20
-
 
 def reserve_gym_spot(username, password, resv_date, resv_time, headless=False, debug=True):
     # options
@@ -29,7 +27,7 @@ def reserve_gym_spot(username, password, resv_date, resv_time, headless=False, d
         chrome_options.add_argument("--headless")
 
     driver = webdriver.Chrome(options=chrome_options, service=Service(ChromeDriverManager().install()))
-    driver.get(URL)
+    driver.get("http://applications.ucy.ac.cy/pub_sportscenter/main")
     if debug:
         print('Fetched url...')
 
