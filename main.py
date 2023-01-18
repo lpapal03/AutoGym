@@ -1,16 +1,12 @@
 import os
 import sys
 import time
-from datetime import datetime
-from datetime import timedelta
-
 import schedule as schedule
 import reserver
 import tools
 
 DEBUG = True
 HEADLESS = False
-
 
 def reserve_for_all():
     # iterate files in /users and extract info for each and run reserver on them
@@ -22,13 +18,21 @@ def reserve_for_all():
                 reserver.reserve_gym_spot(username, password, r_date, r_time, HEADLESS, DEBUG)
         except Exception:
             print('Error with', file)
+    print("Cycle done")
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
+    if sys.argv.__contains__('hl'):
+        HEADLESS = True
+
+    if len(sys.argv) == 1 or (len(sys.argv) == 2 and sys.argv.__contains__('hl')):
         reserve_for_all()
-    elif len(sys.argv) > 1 and sys.argv[1] == 's':
+        exit(0)
+    
+    if sys.argv.__contains__('s'):
         schedule.every().day.at("08:01").do(reserve_for_all)
+        print('Scheduled')
         while True:
             schedule.run_pending()
-            time.sleep(1)
+            time.sleep(1)    
+
