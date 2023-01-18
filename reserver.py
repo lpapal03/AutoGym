@@ -1,12 +1,5 @@
-# begin
-
-import os
-import sys
 import time
 from datetime import datetime
-from datetime import timedelta
-
-import schedule as schedule
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -21,7 +14,7 @@ MAX_DELAY = 20
 
 def reserve_gym_spot(username, password, resv_date, resv_time, headless=False, debug=True):
     # options
-    print('Start reserver for ' + username + "\n------------")
+    print("------------\nStart reserver for "+ username)
     chrome_options = Options()
     if headless:
         chrome_options.add_argument("--headless")
@@ -121,9 +114,6 @@ def reserve_gym_spot(username, password, resv_date, resv_time, headless=False, d
 
     # create gym form
     try:
-        # date_input = WebDriverWait(driver, MAX_DELAY).until(
-        #     EC.presence_of_element_located((By.NAME, 'p_reservation_date')))
-        # driver.execute_script("arguments[0].removeAttribute('readonly')", date_input)
         sport_selection = Select(
             WebDriverWait(driver, MAX_DELAY).until(EC.presence_of_element_located((By.NAME, 'p_class_code'))))
         set_time = Select(
@@ -133,9 +123,6 @@ def reserve_gym_spot(username, password, resv_date, resv_time, headless=False, d
             (By.XPATH, '/html/body/div[2]/div/div[4]/form/table/tbody/tr[3]/td[2]/textarea')))
         submit_button = WebDriverWait(driver, MAX_DELAY).until(EC.presence_of_element_located((By.TAG_NAME, "button")))
 
-
-        # date_input.clear()
-        # date_input.send_keys(resv_date)
         sport_selection.select_by_value('41')
         set_time.select_by_visible_text(resv_time)
         purpose.send_keys("Gym")
@@ -162,6 +149,6 @@ def reserve_gym_spot(username, password, resv_date, resv_time, headless=False, d
         driver.quit()
 
     if debug:
-        print('Done')
+        print('Done\n------------\n')
     time.sleep(MAX_DELAY)
     driver.quit()
