@@ -18,7 +18,7 @@ def extract_details(filename):
 def caluclate_resv_date_and_time(username, preference_map):
     # calculate date to reserve
     today = datetime.now()
-    target_date = today + timedelta(days=2)
+    target_date = today + timedelta(days=5)
     resv_date = target_date.strftime("%d-%m-%Y")
 
     # if target day is Sunday or has no preference then end
